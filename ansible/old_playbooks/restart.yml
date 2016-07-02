@@ -1,9 +1,0 @@
----
- - hosts: 192.168.0.105
-   user: ismael
-   become_user: root
-   become: yes
-   tasks:
-   - name: shutdown machine
-     command: /sbin/reboot
- 
