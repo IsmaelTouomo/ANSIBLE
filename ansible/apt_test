@@ -1,7 +1,0 @@
----
-- hosts: RPI
-  user: root
-  
-  tasks:
-    - name: apt update
-      action: apt update_cache=yes
