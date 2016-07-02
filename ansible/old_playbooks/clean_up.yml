@@ -1,0 +1,29 @@
+---
+ - hosts: 192.168.0.105
+   user: ismael
+   become_user: root
+   become: yes
+   vars:   
+    # created with:
+    # python -c 'import crypt; print crypt.crypt("iotuser", "iotuser")'
+    password: ioPcmo/ol77oI
+    
+   tasks:
+   
+   # Walk through account creation, modification, and deletion
+   #- name: test basic user account creation
+   #  user: name=iotuser groups=dialout,sudo password={{ password }} shell=/bin/bash home=/home/iotuser
+     
+   #- name: test basic user account creation
+   #  user: name=ismael state=absent force=yes     
+
+   #- name: Reboot the server 
+   #  shell: sleep 2 && shutdown -r now 
+   #  async: 1
+   #  poll: 0
+   #  become: yes
+   #  ignore_errors: true
+   - name: test file transfer
+     copy: src=/home/ismael/gui.py dest=/home/ismael/Dokumente/test group=root owner=root      
+  
+     

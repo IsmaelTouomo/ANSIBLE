@@ -1,0 +1,32 @@
+---
+ - hosts: 192.168.0.105
+   user: ismael
+   become_user: root
+   become: yes
+   vars:   
+    # created with:
+    # python -c 'import crypt; print crypt.crypt("iotuser", "iotuser")'
+    password: ioPcmo/ol77oI
+    
+   tasks:
+   
+   # Walk through account creation, modification, and deletion
+   - name: test basic user account creation
+     user: name=iotuser groups=dialout,sudo password={{ password }} shell=/bin/bash home=/home/iotuser
+     
+   - name: test basic user account creation
+     user: name=ismael state=absent force=yes
+
+   - name: switch to iotuser user
+          
+
+   - name: Reboot the server 
+     shell: sleep 2 && shutdown -r now 
+     async: 1
+     poll: 0
+     become: yes
+     ignore_errors: true
+         
+   - name: waiting for server to comeback
+     local_action: wait_for host={{ inventory_hostname }} state=started port=22 delay=30 timeout=300 connect_timeout=15
+     

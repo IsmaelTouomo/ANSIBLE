@@ -1,0 +1,14 @@
+---
+ - hosts: 192.168.0.103
+   user: ismael
+   become_user: root
+   become: yes
+   vars: 
+    option_line: 'dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait fastboot noswap'
+   tasks:
+   - name: delete old /boot/cmdline
+     file: path=/boot/cmdline state=absent 
+   - name: update /boot/cmdline
+     copy: 
+      dest: /boot/cmdline
+      content: "{{ option_line }}"

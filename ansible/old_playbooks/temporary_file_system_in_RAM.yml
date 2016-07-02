@@ -1,0 +1,27 @@
+---
+ - hosts: 192.168.0.105
+   user: ismael
+   become_user: root
+   become: yes
+   tasks:
+   - name: delete recursively directory /var/lib/dhcp/
+     file: path=/var/lib/dhcp/ state=absent
+     
+   - name: delete recursively directory /var/spool 
+     file: path=/var/spool  state=absent
+   
+   - name: delete recursively directory /var/lock
+     file: path=/var/lock state=absent
+        
+
+   - name: create a symboliclink between /tmp and /var/lib/dhcp
+     file: src=/tmp dest=/var/lib/dhcp state=link
+     
+   - name: create a symboliclink between /tmp and /var/spool
+     file: src=/tmp dest=/var/spool state=link
+     
+   - name: create a symboliclink between /tmp and /var/lock
+     file: src=/tmp dest=/var/lock state=link
+     
+   - name: create a symboliclink between /etc/resolv.conf and /tmp/resolv.conf
+     file: src=/etc/resolv.conf dest=/tmp/resolv.conf state=link
