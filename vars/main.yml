@@ -1,6 +1,0 @@
----
-foo: ' '
-# created with:
-# python -c 'import crypt; print crypt.crypt("iotuser", "iotuser")'
-password: ioPcmo/ol77oI
-gateway: '{{ gateway }}'
